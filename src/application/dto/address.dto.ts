@@ -1,15 +1,34 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateAddress {
-  @ApiProperty({ description: 'Street address', example: '123 Main St' })
-  street: string;
+export class CreateAddressDto {
+    @ApiProperty({ description: 'Street of the address' })
+    @IsNotEmpty()
+    @IsString()
+    street: string;
 
-  @ApiProperty({ description: 'City', example: 'New York' })
-  city: string;
+    @ApiProperty({ description: 'Number of the address' })
+    @IsNotEmpty()
+    @IsString()
+    number: string;
 
-  @ApiProperty({ description: 'State or region', example: 'NY' })
-  state: string;
+    @ApiProperty({ description: 'City of the address' })
+    @IsNotEmpty()
+    @IsString()
+    city: string;
 
-  @ApiProperty({ description: 'Postal code', example: '10001' })
-  zipCode: string;
+    @ApiProperty({ description: 'Neighborhood of the address' })
+    @IsNotEmpty()
+    @IsString()
+    neighborhood: string;
+
+    @ApiProperty({ description: 'Postal code of the address' })
+    @IsNotEmpty()
+    @IsString()
+    postalCode: string;
+
+    @ApiProperty({ description: 'State of the address' })
+    @IsNotEmpty()
+    @IsString()
+    state: string;
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserType } from 'src/domain/enums/user.type';
 import { Address } from 'src/domain/models/valueObjects/adress';
-import { CreateAddress } from './address.dto';
+import { CreateAddressDto } from './address.dto';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -30,9 +30,9 @@ export class CreateUserDto {
 
   @ApiProperty({
     description: 'Address of the user',
-    type: CreateAddress,
+    type: CreateAddressDto,
   })
-  address: CreateAddress;
+  address: CreateAddressDto;
 
   @ApiProperty({
     enum: UserType,

@@ -1,0 +1,15 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "yourUsername",
+    "password": "yourPassword",
+    "database": "yourDatabaseName",
+    "synchronize": false, 
+    "logging": true,
+    "entities": ["src/domain/models/**/*.ts"],
+    "migrations": ["src/infrastructure/persistence/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"],
+    "migrationsTableName": "migrations"
+  }
+  

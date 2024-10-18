@@ -1,13 +1,31 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { FoodStatus } from '../enums/food.status';
 
+@Entity()
 export class Food {
-  id: string; 
-  foodType: string; 
-  expirationDate: Date; 
-  weight: number; 
-  quantity: number; 
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column()
+  foodType: string;
+
+  @Column({ type: 'date' })
+  expirationDate: Date;
+
+  @Column('float')
+  weight: number;
+
+  @Column('int')
+  quantity: number;
+
+  @Column()
   donorId: string;
-  status: FoodStatus; 
+
+  @Column({
+    type: 'enum',
+    enum: FoodStatus,
+  })
+  status: FoodStatus;
 
   constructor(
     id: string,

@@ -1,16 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { DonationStatus } from '../enums/donation.status';
 
 export class UpdateDonationStatusDto {
   @ApiProperty({
     description: 'Status of the donation (APPROVED or REJECTED)',
     example: 'APPROVED',
   })
-  status: 'APPROVED' | 'REJECTED';
+  status: DonationStatus
 
   @ApiProperty({
-    description: 'Additional notes or reason for rejection (if applicable)',
-    example: 'Food expired, unable to donate',
-    required: false,
+    description: 'Donation order id',
+    example: '1',
   })
-  notes?: string;
+  donationOrderId: string
 }

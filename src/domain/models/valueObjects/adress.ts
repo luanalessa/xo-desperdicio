@@ -1,12 +1,32 @@
+import { Column } from 'typeorm';
+
 export class Address {
+    @Column()  // Define a coluna para 'street'
     street: string;
+
+    @Column()
     number: string;
+
+    @Column()
     city: string;
+
+    @Column()
     neighborhood: string;
+
+    @Column()
     postalCode: string;
+
+    @Column()
     state: string;
 
-    constructor(street: string, number: string, city: string, neighborhood: string, state: string, postalCode: string) {
+    constructor(
+        street: string,
+        number: string,
+        city: string,
+        neighborhood: string,
+        postalCode: string,
+        state: string
+    ) {
         this.street = street;
         this.number = number;
         this.city = city;

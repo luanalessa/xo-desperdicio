@@ -1,15 +1,30 @@
-import { UserType } from "../enums/user.type";
-import { Address } from "./valueObjects/adress";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { UserType } from '../enums/user.type';
+import { Address } from './valueObjects/adress';
 
+@Entity()  
 export class User {
-    constructor(
-      public id: string,
-      public name: string,
-      public phone: string,
-      public email: string,
-      public password: string,
-      public address: Address,
-      public type: UserType,
-    ) {}
-  }
-  
+    @PrimaryGeneratedColumn('uuid')  
+    id: string;
+
+    @Column()  
+    name: string;
+
+    @Column()
+    phone: string;
+
+    @Column({ unique: true })  
+    email: string;
+
+    @Column()
+    password: string;
+
+    @Column(() => Address)  
+    address: Address;
+
+    @Column({
+        type: 'enum',
+        enum: UserType,
+    })
+    type: UserType;
+}

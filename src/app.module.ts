@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UsersModule } from './infrastructure/modules/user.module';
-import { DonationsModule } from './infrastructure/modules/donation.module';
+import { DonationOrderModule } from './infrastructure/modules/donation.order.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './domain/models/user.model';
-import { Donation } from './domain/models/donation.model';
+import { DonationOrder } from './domain/models/donation.order.model';
+import { Food } from './domain/models/food.model';
 
 
 @Module({
@@ -11,16 +12,16 @@ import { Donation } from './domain/models/donation.model';
     TypeOrmModule.forRoot({
       type: 'postgres', 
       host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'admin',
-      database: 'food-donation',
-      entities: [User, Donation], 
+      port: 5434,
+      username: 'yourUsername',
+      password: 'yourPassword',
+      database: 'yourDatabaseName',
+      entities: [User, DonationOrder, Food], 
       synchronize: true,
-      migrations: ['src/migrations/**/*.{ts,js}'], 
+      migrations: ['src/infrastructure/persistence/migration/**/*.{ts,js}'], 
     }),
-    TypeOrmModule.forFeature([User]),
-  UsersModule, DonationsModule],
+    TypeOrmModule.forFeature([User, DonationOrder]),
+  UsersModule, DonationOrderModule],
   controllers: [],
   providers: [],
 })

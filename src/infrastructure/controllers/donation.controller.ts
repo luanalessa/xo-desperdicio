@@ -1,9 +1,9 @@
 import { Controller, Post, Body, Get, Put, Param } from '@nestjs/common';
 import { DonationService } from '../../application/services/donation.services';
-import { Food } from '../../domain/models/food.model';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { CreateDonationOrderDto } from 'src/application/dto/donation.order.dto';
 import { UpdateDonationStatusDto } from 'src/application/dto/update.donation.status.dto';
+import { DonationOrder } from 'src/domain/models/donation.order.model';
 
 @ApiTags('donations')
 @Controller('donations')
@@ -11,18 +11,18 @@ export class DonationController {
   constructor(private readonly donationService: DonationService) {}
 
   @Post()
-  createDonation(@Body() donation: Food): Food {
-    return this.donationService.createDonation(donation);
+  async createDonation(): Promise<DonationOrder[]> {
+    return await this.donationService.getDonationOrders();
   }
 
   @Get()
-  getDonations(): Food[] {
-    return this.donationService.getDonations();
+  async getDonationOrder(@Body() id: string): Promise<DonationOrder> {
+    return await this.donationService.getDonationOrderById(id);
   }
 
   @Post('request')
   @ApiBody({ type: CreateDonationOrderDto })
-  requestDonation(@Body() createOrderDto: CreateDonationOrderDto): any {
+  createDonationOrder(@Body() createOrderDto: CreateDonationOrderDto): any {
     return this.donationService.createDonationOrder(createOrderDto);
   }
 
@@ -33,6 +33,6 @@ export class DonationController {
     @Param('donationOrderId') donationOrderId: string,
     @Body() updateStatusDto: UpdateDonationStatusDto,
   ): any {
-    return this.donationService.updateDonationStatus(donationOrderId, updateStatusDto);
+    return this.donationService.updateDonationStatus(updateStatusDto);
 }
 }

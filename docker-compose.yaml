@@ -1,4 +1,4 @@
-version: '3.3'  # Ajuste a versão para uma que é suportada
+version: '3.3'
 
 services:
   db:
@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: yourPassword
       POSTGRES_DB: yourDatabaseName
     ports:
-      - "5432:5432"
+      - "5434:5432"  # Corrigido para 5432, que é a porta padrão do PostgreSQL
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

@@ -2,58 +2,64 @@ import { Injectable } from '@nestjs/common';
 import { Food } from '../../domain/models/food.model';
 import { CreateDonationOrderDto } from '../dto/donation.order.dto';
 import { UpdateDonationStatusDto } from '../dto/update.donation.status.dto';
+import { DonationOrder } from 'src/domain/models/donation.order.model';
+import { DonationOrderRepository } from 'src/domain/repositories/donation.order.repository';
+import { FoodRepository } from 'src/domain/repositories/food.repository'; // Adicione a importação
 
 @Injectable()
 export class DonationService {
-  private donations: Food[] = [];
-  private donationOrders: any[] = [];
+  constructor(
+    private readonly donationOrderRepository: DonationOrderRepository,
+    private readonly foodRepository: FoodRepository, 
+  ) {}
 
-  createDonation(food: Food): Food {
-    this.donations.push(food);
-    return food;
+  async getDonationOrders(): Promise<DonationOrder[]> {
+    return await this.donationOrderRepository.findAll();
   }
 
-  getDonations(): Food[] {
-    return this.donations;
-  }
-
-  createDonationOrder(createOrderDto: CreateDonationOrderDto): any {
-    const { foodId, quantity, requesterId } = createOrderDto;
-
-    // Encontra o item de doação pelo ID
-    const donation = this.donations.find(item => item.id === foodId);
-    if (!donation) {
-      throw new Error('Donation not found');
+  async getDonationOrderById(orderId: string): Promise<DonationOrder | null> {
+    const donationOrder = await this.donationOrderRepository.findById(orderId);
+    
+    if (!donationOrder) {
+      throw new Error('Donation order not found');
     }
-
-    // Verifica se a quantidade está disponível
-    if (donation.quantity < quantity) {
-      throw new Error('Insufficient quantity available');
-    }
-
-    donation.quantity -= quantity;
-
-    const donationOrder = {
-      orderId: 'new-order-id', 
-      foodId: donation.id,
-      quantity,
-      requesterId,
-      status: 'PENDING', 
-    };
 
     return donationOrder;
   }
 
-  updateDonationStatus(donationOrderId: string, updateStatusDto: UpdateDonationStatusDto): any {
-    const donationOrder = this.donationOrders.find(order => order.orderId === donationOrderId);
+  async createDonationOrder(createOrderDto: CreateDonationOrderDto): Promise<DonationOrder> {
+    const { foodId, quantity, requesterId } = createOrderDto;
+
+    // Use o repositório de Food para buscar o alimento
+    const foodItem = await this.foodRepository.findById(foodId);
+    if (!foodItem) {
+      throw new Error('Food item not found');
+    }
+
+    if (foodItem.quantity < quantity) {
+      throw new Error('Insufficient quantity available');
+    }
+
+    foodItem.quantity -= quantity;
+
+    const donationOrder = new DonationOrder(
+      quantity,
+      requesterId,
+      foodId
+    );
+
+    return await this.donationOrderRepository.save(donationOrder);
+  }
+
+  async updateDonationStatus(updateStatusDto: UpdateDonationStatusDto): Promise<DonationOrder> {
+    const donationOrder = await this.donationOrderRepository.findById(updateStatusDto.donationOrderId);
 
     if (!donationOrder) {
       throw new Error('Donation order not found');
     }
 
     donationOrder.status = updateStatusDto.status;
-    donationOrder.notes = updateStatusDto.notes || '';
 
-    return donationOrder;
+    return await this.donationOrderRepository.save(donationOrder);
   }
 }

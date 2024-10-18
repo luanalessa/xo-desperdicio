@@ -21,7 +21,7 @@ export class UserRepositoryImpl implements UserRepository {
 
   async findById(id: string): Promise<User | null> {
     return await this.userRepository.findOne({
-        where: {id: id}
+        where: {id}
     });
   }
 }
