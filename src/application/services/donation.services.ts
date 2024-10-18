@@ -3,22 +3,25 @@ import { Food } from '../../domain/models/food.model';
 import { CreateDonationOrderDto } from '../dto/donation.order.dto';
 import { UpdateDonationStatusDto } from '../dto/update.donation.status.dto';
 import { DonationOrder } from 'src/domain/models/donation.order.model';
-import { DonationOrderRepository } from 'src/domain/repositories/donation.order.repository';
-import { FoodRepository } from 'src/domain/repositories/food.repository'; // Adicione a importação
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DonationService {
   constructor(
-    private readonly donationOrderRepository: DonationOrderRepository,
-    private readonly foodRepository: FoodRepository, 
+    @InjectRepository(DonationOrder) 
+    private readonly donationOrderRepository: Repository<DonationOrder>,
+
+    @InjectRepository(Food) 
+    private readonly foodRepository: Repository<Food>, 
   ) {}
 
   async getDonationOrders(): Promise<DonationOrder[]> {
-    return await this.donationOrderRepository.findAll();
+    return await this.donationOrderRepository.find(); 
   }
 
   async getDonationOrderById(orderId: string): Promise<DonationOrder | null> {
-    const donationOrder = await this.donationOrderRepository.findById(orderId);
+    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: orderId } }); // Usando 'findOne'
     
     if (!donationOrder) {
       throw new Error('Donation order not found');
@@ -30,8 +33,7 @@ export class DonationService {
   async createDonationOrder(createOrderDto: CreateDonationOrderDto): Promise<DonationOrder> {
     const { foodId, quantity, requesterId } = createOrderDto;
 
-    // Use o repositório de Food para buscar o alimento
-    const foodItem = await this.foodRepository.findById(foodId);
+    const foodItem = await this.foodRepository.findOne({ where: { id: foodId } }); 
     if (!foodItem) {
       throw new Error('Food item not found');
     }
@@ -52,7 +54,7 @@ export class DonationService {
   }
 
   async updateDonationStatus(updateStatusDto: UpdateDonationStatusDto): Promise<DonationOrder> {
-    const donationOrder = await this.donationOrderRepository.findById(updateStatusDto.donationOrderId);
+    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: updateStatusDto.donationOrderId } }); // Usando 'findOne'
 
     if (!donationOrder) {
       throw new Error('Donation order not found');
