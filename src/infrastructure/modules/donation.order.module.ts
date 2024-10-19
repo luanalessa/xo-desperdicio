@@ -7,11 +7,11 @@ import { FoodModule } from './food.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([DonationOrder]), // Register the entity here
-    FoodModule,  // Importando o módulo que contém FoodRepository
+    TypeOrmModule.forFeature([DonationOrder]), 
+    FoodModule,  
   ],
   controllers: [DonationController],
-  providers: [DonationService],  // No need to add repositories here
+  providers: [DonationService],  
   exports: [DonationService],
 })
 export class DonationOrderModule {}

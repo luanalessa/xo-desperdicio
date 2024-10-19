@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Food } from '../../domain/models/food.model';
-import { CreateDonationOrderDto } from '../dto/donation.order.dto';
-import { UpdateDonationStatusDto } from '../dto/update.donation.status.dto';
-import { DonationOrder } from 'src/domain/models/donation.order.model';
+import { Food } from 'src/domain/models/food.model';  
+import { CreateDonationOrderDto } from 'src/application/dto/donation.order.dto';  
+import { UpdateDonationStatusDto } from 'src/application/dto/update.donation.status.dto'; 
+import { DonationOrder } from 'src/domain/models/donation.order.model';  
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

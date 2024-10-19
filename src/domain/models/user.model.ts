@@ -2,24 +2,24 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { UserType } from '../enums/user.type';
 import { Address } from './valueObjects/adress';
 
-@Entity()  
+@Entity()
 export class User {
-    @PrimaryGeneratedColumn()  
+    @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()  
+    @Column({ nullable: false })
     name: string;
 
     @Column()
     phone: string;
 
-    @Column({ unique: true })  
+    @Column({ unique: true })
     email: string;
 
     @Column()
     password: string;
 
-    @Column(() => Address)  
+    @Column(() => Address)
     address: Address;
 
     @Column({
@@ -27,4 +27,20 @@ export class User {
         enum: UserType,
     })
     type: UserType;
+
+    constructor(
+        name: string,
+        phone: string,
+        email: string,
+        password: string,
+        address: Address,
+        type: UserType = UserType.NORMAL, // Valor padrão para o tipo de usuário
+    ) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.type = type;
+    }
 }

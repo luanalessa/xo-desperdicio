@@ -4,7 +4,7 @@ import { DonationStatus } from '../enums/donation.status';
 export class UpdateDonationStatusDto {
   @ApiProperty({
     description: 'Status of the donation (APPROVED or REJECTED)',
-    example: 'APPROVED',
+    example: 'COMPLETED | PENDING | CANCELLED',
   })
   status: DonationStatus
 

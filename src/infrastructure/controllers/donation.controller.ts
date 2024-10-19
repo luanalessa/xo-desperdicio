@@ -10,29 +10,29 @@ import { DonationOrder } from 'src/domain/models/donation.order.model';
 export class DonationController {
   constructor(private readonly donationService: DonationService) {}
 
-  @Post()
-  async createDonation(): Promise<DonationOrder[]> {
+  // Rota para pegar todos os pedidos de doação
+  @Get()
+  async getAllDonationOrders(): Promise<DonationOrder[]> {
     return await this.donationService.getDonationOrders();
   }
 
-  @Get()
-  async getDonationOrder(@Body() id: string): Promise<DonationOrder> {
+  @Get(':id')
+  @ApiParam({ name: 'id', description: 'ID do pedido de doação' })
+  async getDonationOrderById(@Param('id') id: string): Promise<DonationOrder> {
     return await this.donationService.getDonationOrderById(id);
   }
 
   @Post('request')
   @ApiBody({ type: CreateDonationOrderDto })
-  createDonationOrder(@Body() createOrderDto: CreateDonationOrderDto): any {
-    return this.donationService.createDonationOrder(createOrderDto);
+  async createDonationOrder(@Body() createOrderDto: CreateDonationOrderDto): Promise<DonationOrder> {
+    return await this.donationService.createDonationOrder(createOrderDto);
   }
 
   @Put('update-status/:donationOrderId')
-  @ApiParam({ name: 'donationOrderId', description: 'ID of the donation order to update' })
   @ApiBody({ type: UpdateDonationStatusDto })
-  updateDonationStatus(
-    @Param('donationOrderId') donationOrderId: string,
+  async updateDonationStatus(
     @Body() updateStatusDto: UpdateDonationStatusDto,
-  ): any {
-    return this.donationService.updateDonationStatus(updateStatusDto);
-}
+  ): Promise<DonationOrder> {
+    return await this.donationService.updateDonationStatus(updateStatusDto);
+  }
 }
