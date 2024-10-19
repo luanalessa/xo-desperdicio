@@ -4,7 +4,7 @@ import { Address } from './valueObjects/adress';
 
 @Entity()  
 export class User {
-    @PrimaryGeneratedColumn('uuid')  
+    @PrimaryGeneratedColumn()  
     id: string;
 
     @Column()  

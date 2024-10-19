@@ -3,7 +3,7 @@ import { FoodStatus } from '../enums/food.status';
 
 @Entity()
 export class Food {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column()

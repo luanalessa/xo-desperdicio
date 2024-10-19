@@ -3,7 +3,7 @@ import { DonationStatus } from "../enums/donation.status";
 
 @Entity()
 export class DonationOrder {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column({ nullable: true })
