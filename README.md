@@ -1,73 +1,30 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Xô Desperdício 🍏
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Xô Desperdício** é uma plataforma que conecta pessoas e empresas que desejam doar alimentos próximos da data de validade, mas ainda adequados para o consumo, ou que queiram fazer doações de alimentos em geral, com pessoas em situação de vulnerabilidade e instituições que precisam. O objetivo é reduzir o desperdício de alimentos e combater a fome de maneira eficiente e sustentável.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Alinhamento com a ODS 2 da ONU
 
-## Description
+O projeto está diretamente alinhado com a **ODS 2 - Fome Zero e Agricultura Sustentável**, uma das 17 **Objetivos de Desenvolvimento Sustentável (ODS)** da ONU. A ODS 2 busca erradicar a fome, alcançar a segurança alimentar, melhorar a nutrição e promover a agricultura sustentável até 2030. 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A plataforma contribui para:
 
-## Installation
+- **Erradicar a fome**: Facilitando o acesso a alimentos para pessoas em situação de vulnerabilidade.
+- **Reduzir o desperdício de alimentos**: Conectando doadores a quem realmente precisa, evitando que alimentos em bom estado sejam descartados.
+- **Promover sistemas alimentares sustentáveis**: Incentivando empresas e pessoas a adotarem práticas responsáveis em relação à doação e reaproveitamento de alimentos.
 
-```bash
-$ npm install
-```
+Ao conectar doadores e receptores, o **Xô Desperdício** reforça o compromisso de promover a distribuição justa de recursos alimentares e reduzir a desigualdade no acesso à alimentação de qualidade.
 
-## Running the app
+## Funcionalidades
 
-```bash
-# development
-$ npm run start
+- **Cadastro de doadores**: Permite que empresas e indivíduos registrem doações de alimentos.
+- **Cadastro de receptores**: Pessoas e ONGs podem se cadastrar para receber doações.
+- **Geolocalização de doações**: Mostra doações disponíveis nas proximidades. [em breve]
+- **Filtros de busca**: Filtra doações por tipo de alimento e data de validade. [em breve]
 
-# watch mode
-$ npm run start:dev
+## Tecnologias Utilizadas
 
-# production mode
-$ npm run start:prod
-```
+- **Backend**: [NestJS](https://nestjs.com/) com [TypeScript](https://www.typescriptlang.org/)
+- **Banco de Dados**: [PostgreSQL](https://www.postgresql.org/)
+- **Autenticação**: JWT (JSON Web Token)
+- **Deploy**: [AWS](https://aws.amazon.com/)
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
