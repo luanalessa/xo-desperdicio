@@ -1,17 +1,23 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { UserService } from '../../application/services/user.services';
 import { User } from '../../domain/models/user.model';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/application/dto/user.dto';
+import { UserType } from '@domain/enums/user.type';
 
 @ApiTags('users')
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  registerUser(@Body() user: CreateUserDto): Promise<User> {
-    return this.userService.registerUser(user);
+  @Post(':type')
+  @ApiQuery({
+    name: 'type',
+    enum: UserType, 
+    description: 'Type of user',
+    required: true,
+  })  registerUser(@Query('type') type: UserType, @Body() user: CreateUserDto): Promise<User> {
+    return this.userService.registerUser(user, type);
   }
 
   @Get()

@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../domain/models/user.model';
 import { CreateUserDto } from '../dto/user.dto';
+import { UserType } from '@domain/enums/user.type';
 
 @Injectable()
 export class UserService {
@@ -11,8 +12,11 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async registerUser(userDto: CreateUserDto): Promise<User> {
-    const user = this.userRepository.create(userDto);
+  async registerUser(userDto: CreateUserDto, type: UserType): Promise<User> {
+    const user = this.userRepository.create({
+      ...userDto, 
+      type: type
+    });
     return await this.userRepository.save(user);
   }
 

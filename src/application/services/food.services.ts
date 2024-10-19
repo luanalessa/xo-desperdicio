@@ -14,8 +14,13 @@ export class FoodService {
     private readonly foodRepository: Repository<Food>,
   ) {}
 
-  async createFood(createFoodDto: CreateFoodDto): Promise<Food> {
-    const food = this.foodRepository.create(createFoodDto); 
+  async createFood(createFoodDto: CreateFoodDto, type: FoodType): Promise<Food> {
+    const food = this.foodRepository.create({
+      ...createFoodDto,
+      foodType: type,
+    }); 
+
+    console.log(createFoodDto, type)
     return await this.foodRepository.save(food);
   }
 

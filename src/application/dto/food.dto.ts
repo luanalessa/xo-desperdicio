@@ -5,11 +5,11 @@ import { FoodType } from 'src/domain/enums/food.type';
 
 export class CreateFoodDto {
   @ApiProperty({
-    description: 'Type of the food item',
-    example: 'Fruits',
+    description: 'Food name',
+    example: 'banana',
   })
   @IsString()
-  foodType: FoodType;
+  name: string;
 
   @ApiProperty({
     description: 'Expiration date of the food item',
@@ -38,13 +38,4 @@ export class CreateFoodDto {
   })
   @IsString()
   donorId: string;
-
-  @ApiProperty({
-    enum: FoodStatus,
-    enumName: 'FoodStatus',
-    description: 'Current status of the food item (e.g., AVAILABLE, EXPIRED)',
-    example: `${FoodStatus.AVAILABLE} | ${FoodStatus.EXPIRED} }`,
-  })
-  @IsEnum(FoodStatus)
-  status: FoodStatus;
 }

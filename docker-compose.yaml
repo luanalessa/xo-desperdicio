@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.3'  # Ajuste a versão para uma que é suportada
 
 services:
   db:
@@ -9,25 +9,9 @@ services:
       POSTGRES_PASSWORD: yourPassword
       POSTGRES_DB: yourDatabaseName
     ports:
-      - "5434:5432"  
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  app:
-    build: .
-    container_name: node_app
-    ports:
-      - "3000:3000" 
-    environment:
-      DATABASE_HOST: db
-      DATABASE_PORT: 5432
-      DATABASE_USER: yourUsername
-      DATABASE_PASSWORD: yourPassword
-      DATABASE_NAME: yourDatabaseName
-    depends_on:
-      - db
-    volumes:
-      - .:/usr/src/app 
 
 volumes:
   postgres_data:

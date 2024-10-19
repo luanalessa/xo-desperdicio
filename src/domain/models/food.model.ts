@@ -7,8 +7,10 @@ export class Food {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column( {type: 'enum',
-    enum: FoodType})
+  @Column({
+    type: 'enum',
+    enum: FoodType
+  })
   foodType: FoodType;
 
   @Column({ type: 'date' })
@@ -36,7 +38,6 @@ export class Food {
     weight: number,
     quantity: number,
     donorId: string,
-    status: FoodStatus
   ) {
     this.id = id;
     this.foodType = foodType;
@@ -44,6 +45,6 @@ export class Food {
     this.weight = weight;
     this.quantity = quantity;
     this.donorId = donorId;
-    this.status = status;
+    this.status = FoodStatus.AVAILABLE;
   }
 }

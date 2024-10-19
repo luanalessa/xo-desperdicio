@@ -6,13 +6,13 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Food Donation API')
-    .setDescription('API to manage food donations for people in need')
+    .setTitle('Xô, desperdício!')
+    .setDescription('Xô Desperdício connects donors of near-expiration or surplus food with people in need and institutions, aiming to reduce food waste and combat hunger sustainably.')
     .setVersion('1.0')
     .build();
     
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('swagger', app, document);
 
   await app.listen(3000);
 }

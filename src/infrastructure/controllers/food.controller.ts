@@ -1,7 +1,7 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Query } from '@nestjs/common';
 import { CreateFoodDto } from '../../application/dto/food.dto';
 import { Food } from '../../domain/models/food.model';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiQuery } from '@nestjs/swagger';
 import { FoodService } from 'src/application/services/food.services';
 import { FoodType } from 'src/domain/enums/food.type';
 
@@ -10,9 +10,16 @@ import { FoodType } from 'src/domain/enums/food.type';
 export class FoodController {
   constructor(private readonly foodService: FoodService) {}
 
-  @Post()
-  async createFood(@Body() createFoodDto: CreateFoodDto): Promise<Food> {
-    return await this.foodService.createFood(createFoodDto);
+  @Post(':type')
+  @ApiQuery({
+    name: 'type',
+    enum: FoodType, 
+    description: 'Type of food',
+    required: true,
+  })
+  async createFood(@Query('type') type: FoodType, @Body() createFoodDto: CreateFoodDto): Promise<Food> {
+    console.log(type);
+    return await this.foodService.createFood(createFoodDto, type);
   }
 
   @Get()
@@ -21,7 +28,13 @@ export class FoodController {
   }
 
   @Get(':type')
-  async getFoodsByType(@Param('type') type: FoodType): Promise<Food[] | null> {
+  @ApiQuery({
+    name: 'type',
+    enum: FoodType, 
+    description: 'Type of food',
+    required: true,
+  })
+  async getFoodsByType(@Query('type') type: FoodType): Promise<Food[] | null> {
     return await this.foodService.getFoodsByType(type);
   }
 }

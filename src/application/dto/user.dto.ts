@@ -33,12 +33,4 @@ export class CreateUserDto {
     type: CreateAddressDto,
   })
   address: CreateAddressDto;
-
-  @ApiProperty({
-    enum: UserType,
-    enumName: 'UserType',
-    description: 'Indicates whether the user is a normal account or a business account',
-    example: `${UserType.BUSINESS} | ${UserType.NORMAL}`,
-  })
-  type: UserType;
 }
