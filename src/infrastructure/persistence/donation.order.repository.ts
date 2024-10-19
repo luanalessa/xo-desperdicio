@@ -33,7 +33,7 @@ export class DonationOrderRepositoryImpl implements DonationOrderRepository {
       throw new Error('Donation order not found');
     }
 
-    donationOrder.status = status; // Atualiza o status
+    donationOrder.status = status; 
     return await this.donationOrderRepository.save(donationOrder); 
   }
 }

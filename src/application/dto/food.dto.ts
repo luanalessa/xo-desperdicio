@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsDate, IsNumber, IsEnum } from 'class-validator';
 import { FoodStatus } from 'src/domain/enums/food.status';
+import { FoodType } from 'src/domain/enums/food.type';
 
 export class CreateFoodDto {
   @ApiProperty({
@@ -8,7 +9,7 @@ export class CreateFoodDto {
     example: 'Fruits',
   })
   @IsString()
-  foodType: string;
+  foodType: FoodType;
 
   @ApiProperty({
     description: 'Expiration date of the food item',
@@ -42,7 +43,7 @@ export class CreateFoodDto {
     enum: FoodStatus,
     enumName: 'FoodStatus',
     description: 'Current status of the food item (e.g., AVAILABLE, EXPIRED)',
-    example: `${FoodStatus.AVAILABLE} | ${FoodStatus.EXPIRED} | ${FoodStatus.UNAVAILABLE}`,
+    example: `${FoodStatus.AVAILABLE} | ${FoodStatus.EXPIRED} }`,
   })
   @IsEnum(FoodStatus)
   status: FoodStatus;

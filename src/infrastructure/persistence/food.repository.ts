@@ -1,9 +1,10 @@
-// src/infrastructure/repositories/food.repository.impl.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Food } from '../../domain/models/food.model';
 import { FoodRepository } from '../../domain/repositories/food.repository';
+import { FoodType } from 'src/domain/enums/food.type';
+import { FoodStatus } from 'src/domain/enums/food.status';
 
 @Injectable()
 export class FoodRepositoryImpl implements FoodRepository {
@@ -20,7 +21,9 @@ export class FoodRepositoryImpl implements FoodRepository {
     return await this.foodRepository.find();
   }
 
-  async findById(id: string): Promise<Food | null> {
-    return await this.foodRepository.findOne({ where: { id } });
-  }
+  async findByType(type: FoodType): Promise<Food[]> {
+    return this.foodRepository.find({
+      where: { foodType: type, status: FoodStatus.AVAILABLE }, 
+    });
+}
 }

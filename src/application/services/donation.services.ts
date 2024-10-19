@@ -21,7 +21,7 @@ export class DonationService {
   }
 
   async getDonationOrderById(orderId: string): Promise<DonationOrder | null> {
-    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: orderId } }); // Usando 'findOne'
+    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: orderId } }); 
     
     if (!donationOrder) {
       throw new Error('Donation order not found');
@@ -54,7 +54,7 @@ export class DonationService {
   }
 
   async updateDonationStatus(updateStatusDto: UpdateDonationStatusDto): Promise<DonationOrder> {
-    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: updateStatusDto.donationOrderId } }); // Usando 'findOne'
+    const donationOrder = await this.donationOrderRepository.findOne({ where: { id: updateStatusDto.donationOrderId } }); 
 
     if (!donationOrder) {
       throw new Error('Donation order not found');

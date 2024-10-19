@@ -1,13 +1,15 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { FoodStatus } from '../enums/food.status';
+import { FoodType } from '../enums/food.type';
 
 @Entity()
 export class Food {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column()
-  foodType: string;
+  @Column( {type: 'enum',
+    enum: FoodType})
+  foodType: FoodType;
 
   @Column({ type: 'date' })
   expirationDate: Date;
@@ -29,7 +31,7 @@ export class Food {
 
   constructor(
     id: string,
-    foodType: string,
+    foodType: FoodType,
     expirationDate: Date,
     weight: number,
     quantity: number,

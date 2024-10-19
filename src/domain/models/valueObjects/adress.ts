@@ -1,7 +1,7 @@
 import { Column } from 'typeorm';
 
 export class Address {
-    @Column()  // Define a coluna para 'street'
+    @Column()  
     street: string;
 
     @Column()

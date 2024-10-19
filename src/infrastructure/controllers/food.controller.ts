@@ -3,6 +3,7 @@ import { CreateFoodDto } from '../../application/dto/food.dto';
 import { Food } from '../../domain/models/food.model';
 import { ApiTags } from '@nestjs/swagger';
 import { FoodService } from 'src/application/services/food.services';
+import { FoodType } from 'src/domain/enums/food.type';
 
 @ApiTags('foods')
 @Controller('foods')
@@ -19,8 +20,8 @@ export class FoodController {
     return await this.foodService.getAllFoods();
   }
 
-  @Get(':id')
-  async getFoodById(@Param('id') id: string): Promise<Food | null> {
-    return await this.foodService.getFoodById(id);
+  @Get(':type')
+  async getFoodsByType(@Param('type') type: FoodType): Promise<Food[] | null> {
+    return await this.foodService.getFoodsByType(type);
   }
 }
