@@ -16,6 +16,19 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@domain/*": ["src/domain/*"],
+      "@dto/*": ["src/application/dto/*"],
+      "@services/*": ["src/application/services/*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*"  
+, "jest.config.ts"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

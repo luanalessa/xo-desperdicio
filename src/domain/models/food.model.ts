@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 import { FoodStatus } from '../enums/food.status';
 import { FoodType } from '../enums/food.type';
 

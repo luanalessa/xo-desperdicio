@@ -1,0 +1,11 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": "./",
+  "testMatch": ["**/test/**/*.spec.ts"],  
+  "collectCoverage": false,
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  }
+}

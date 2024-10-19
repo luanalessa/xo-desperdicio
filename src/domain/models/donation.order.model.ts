@@ -6,17 +6,17 @@ export class DonationOrder {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     requesterId: string | null;
 
-    @Column({ unique: true })
+    @Column()
     foodId: string;
 
     @Column()
     quantity: number;
 
     @Column({ type: 'timestamp' })
-    orderDate: Date;
+    orderDate: Date | null;
 
     @Column({ type: 'timestamp', nullable: true })
     donationDate: Date | null;
@@ -35,8 +35,8 @@ export class DonationOrder {
         this.requesterId = requesterId;
         this.foodId = foodId;
         this.quantity = quantity;
-        this.donationDate = new Date();
-        this.status = DonationStatus.PENDING;
         this.donationDate = null;
+        this.status = DonationStatus.PENDING;
+        this.orderDate = new Date();
     }
 }
